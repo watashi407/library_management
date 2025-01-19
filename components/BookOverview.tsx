@@ -47,7 +47,6 @@ function BookOverview({
 
         <p className="book-description">{description}</p>
       </div>
-      BookOverview
     </section>
   );
 }
