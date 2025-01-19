@@ -55,4 +55,5 @@ interface BookSample {
   cover: string;
   video: string;
   summary: string;
+  isLoanedBook?: boolean;
 }
