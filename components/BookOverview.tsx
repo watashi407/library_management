@@ -60,7 +60,7 @@ function BookOverview({
             variant="wide"
             className="z-10"
             coverColor={color}
-            coverUrl={cover}
+            coverImage={cover}
           />
         </div>
 
@@ -69,7 +69,7 @@ function BookOverview({
             variant="wide"
             className="z-10"
             coverColor={color}
-            coverUrl={cover}
+            coverImage={cover}
           />
         </div>
       </div>
