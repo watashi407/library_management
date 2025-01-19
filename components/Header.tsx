@@ -16,7 +16,7 @@ const Header = () => {
 
       <Link
         href={"https://github.com/watashi407/library_management"}
-        className="text-white sm:hidden"
+        className="text-white max-sm:hidden"
       >
         THIS ONGOING PROJECT AS OF 1/20/2025: GITHUB TO VALIDATE THE PUSH AND PR
         REQUESTS
