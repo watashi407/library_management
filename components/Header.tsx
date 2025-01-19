@@ -13,6 +13,15 @@ const Header = () => {
       <Link href={"/"}>
         <Image src="/icons/logo.svg" alt="BookWise" height={40} width={40} />
       </Link>
+
+      <Link
+        href={"https://github.com/watashi407/library_management"}
+        className="text-white sm:hidden"
+      >
+        THIS ONGOING PROJECT AS OF 1/20/2025: GITHUB TO VALIDATE THE PUSH AND PR
+        REQUESTS
+      </Link>
+
       <ul className="flex flex-row items-center gap-8">
         <Link
           href={"/library"}
