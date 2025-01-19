@@ -1,7 +1,16 @@
+import BookList from "@/components/BookList";
+import BookOverview from "@/components/BookOverview";
+import { sampleBooks } from "@/constant";
+
 export default function Home() {
   return (
     <>
-      <main className="contain-"></main>
+      <BookOverview {...sampleBooks[0]} />
+      {/* <BookList
+        title="Latest Books"
+        books={sampleBooks}
+        containerClassname="mt-28"
+      /> */}
     </>
   );
 }
