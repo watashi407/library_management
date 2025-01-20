@@ -14,7 +14,15 @@ function layout({ children }: { children: ReactNode }) {
         </div>
       </section>
 
-      {children}
+      <section className="auth-illustration">
+        <Image
+          src="/images/auth-illustration.png"
+          alt="Auth Illustration"
+          width={1000}
+          height={1000}
+          className="size-full object-cover"
+        />
+      </section>
     </main>
   );
 }
