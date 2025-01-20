@@ -1,7 +1,17 @@
+"use client";
+import AuthForm from "@/components/AuthForm";
+import { signInSchema } from "@/lib/zod_schema/validation";
 import React from "react";
 
-function page() {
-  return <div>page</div>;
+function signIn() {
+  return (
+    <AuthForm
+      type="SIGN_IN"
+      schema={signInSchema}
+      defaultValues={{ email: "", password: "" }}
+      onSubmit={() => {}}
+    />
+  );
 }
 
-export default page;
+export default signIn;
