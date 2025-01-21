@@ -1,8 +1,14 @@
 import BookList from "@/components/BookList";
 import BookOverview from "@/components/BookOverview";
 import { sampleBooks } from "@/constant";
+import { db } from "@/database/drizzle";
+import { users } from "@/database/schema";
 
-export default function Home() {
+export default async function Home() {
+  const result = await db.select().from(users);
+
+  console.log("results users :", JSON.parse(JSON.stringify(result)));
+
   return (
     <>
       <BookOverview {...sampleBooks[0]} />
