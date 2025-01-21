@@ -2,13 +2,17 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn, getInitials } from "@/lib/utils";
 import Image from "next/image";
-import { auth } from "@/auth";
+import { auth, signOut } from "@/auth";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Session } from "next-auth";
+import { Button } from "./ui/button";
 
-const Header = () => {
+const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
 
+  console.log(`Sesion value`, session);
   return (
     <header className="my-10 flex justify-between gap-5">
       <Link href={"/"}>
@@ -33,6 +37,20 @@ const Header = () => {
         >
           library
         </Link>
+        {session && (
+          <>
+            <li>
+              <Avatar>
+                <AvatarFallback className="font-bold bg-amber-100">
+                  {getInitials(session?.user?.name as string)}
+                </AvatarFallback>
+              </Avatar>
+            </li>
+            <li>
+              <Button onClick={() => signOut()}>Logout</Button>
+            </li>
+          </>
+        )}
       </ul>
     </header>
   );

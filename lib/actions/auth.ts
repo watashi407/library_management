@@ -85,3 +85,9 @@ export const signUpActions = async (params: AuthCredentials) => {
     return { success: false, error: "Signup error" };
   }
 };
+
+export const signOut = async () => {
+  "use server";
+
+  await signOut();
+};
