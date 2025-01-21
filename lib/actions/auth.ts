@@ -4,12 +4,8 @@ import { eq } from "drizzle-orm";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { hash } from "bcryptjs";
-import { signIn } from "@/auth";
-import { headers } from "next/headers";
-// import ratelimit from "@/lib/ratelimit";
-import { redirect } from "next/navigation";
-// import { workflowClient } from "@/lib/workflow";
-import config from "@/lib/config/config";
+import { signIn, signOut } from "@/auth";
+
 import { AuthCredentials } from "@/types";
 
 export const signInWithCredentials = async (
@@ -86,7 +82,7 @@ export const signUpActions = async (params: AuthCredentials) => {
   }
 };
 
-export const signOut = async () => {
+export const signOutAuth = async () => {
   "use server";
 
   await signOut();

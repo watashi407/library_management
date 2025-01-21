@@ -4,10 +4,10 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { cn, getInitials } from "@/lib/utils";
 import Image from "next/image";
-import { auth, signOut } from "@/auth";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Session } from "next-auth";
 import { Button } from "./ui/button";
+import { signOutAuth } from "@/lib/actions/auth";
 
 const Header = ({ session }: { session: Session }) => {
   const pathname = usePathname();
@@ -47,7 +47,7 @@ const Header = ({ session }: { session: Session }) => {
               </Avatar>
             </li>
             <li>
-              <Button onClick={() => signOut()}>Logout</Button>
+              <Button onClick={signOutAuth}>Logout</Button>
             </li>
           </>
         )}
