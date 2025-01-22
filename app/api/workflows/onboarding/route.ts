@@ -3,7 +3,6 @@ import { users } from "@/database/schema";
 import { sendEmail } from "@/lib/workflow";
 import { serve } from "@upstash/workflow/nextjs";
 import { eq } from "drizzle-orm";
-import EmailTemplate from "@/components/email-template/OnboardTemplate";
 
 type UserState = "non-active" | "active";
 
@@ -43,8 +42,8 @@ export const { POST } = serve<InitialData>(async (context) => {
   await context.run("new-signup", async () => {
     await sendEmail({
       email,
-      subject: "Welcome to Watashi Libro the library you need",
-      message: EmailTemplate(fullName) as React.ReactElement,
+      subject: "Welcome to our platform",
+      message: `Welcome to our platform ${fullName} to my Watashi Libro`,
     });
   });
 
@@ -59,16 +58,16 @@ export const { POST } = serve<InitialData>(async (context) => {
       await context.run("send-email-non-active", async () => {
         await sendEmail({
           email,
-          subject: "Are you still there alive and kicking ?",
-          message: EmailTemplate(fullName) as React.ReactElement,
+          subject: "Welcome to our platform",
+          message: `Welcome to our platform ${fullName} to my Watashi Libro`,
         });
       });
     } else if (state === "active") {
       await context.run("send-email-active", async () => {
         await sendEmail({
           email,
-          subject: "Welcome Back!",
-          message: EmailTemplate(fullName) as React.ReactElement,
+          subject: "Welcome to our platform",
+          message: `Welcome to our platform ${fullName} to my Watashi Libro`,
         });
       });
     }
