@@ -1,7 +1,6 @@
-import redis from "@/database/redis";
 import { Ratelimit } from "@upstash/ratelimit";
+import redis from "@/database/redis";
 
-//invoke ratelimit in upstash for some request or api call
 const ratelimit = new Ratelimit({
   redis,
   limiter: Ratelimit.fixedWindow(3, "1m"),
