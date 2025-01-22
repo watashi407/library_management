@@ -8,10 +8,10 @@ import { signIn, signOut } from "@/auth";
 
 import { AuthCredentials } from "@/types";
 import { headers } from "next/headers";
-import ratelimit from "../ratelimit";
+import ratelimit from "@/lib/ratelimit";
 import { redirect } from "next/navigation";
-import { workflowClient } from "../workflow";
-import config from "../config/config";
+import { workflowClient } from "@/lib/workflow";
+import config from "@/lib/config/config";
 
 export const signInWithCredentials = async (
   params: Pick<AuthCredentials, "email" | "password">
@@ -71,7 +71,7 @@ export const signUpActions = async (params: AuthCredentials) => {
     });
 
     await workflowClient.trigger({
-      url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
+      url: `${config.env.apiEndpoint}/api/workflows/onboarding`,
       body: {
         email,
         fullName,
@@ -88,7 +88,5 @@ export const signUpActions = async (params: AuthCredentials) => {
 };
 
 export const signOutAuth = async () => {
-  "use server";
-
   await signOut();
 };
