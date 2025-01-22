@@ -38,7 +38,7 @@ interface Props<T extends FieldValues> {
   type: "SIGN_IN" | "SIGN_UP";
 }
 
-//define to the props the types
+//define to the props the types  dafuq
 const AuthForm = <T extends FieldValues>({
   type,
   schema,
