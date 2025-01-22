@@ -1,15 +1,13 @@
-import * as React from "react";
+import React from "react";
 
-interface EmailTemplateProps {
-  name: string;
-}
+const OnboardTemplate = (name: string) => {
+  return (
+    <div>
+      <div>
+        <h1>Hi hello {name}</h1>
+      </div>
+    </div>
+  );
+};
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
-  name,
-}) => (
-  <div>
-    <h1>Welcome, {name}!</h1>
-  </div>
-);
-
-export default EmailTemplate;
+export default OnboardTemplate;
