@@ -2,10 +2,8 @@ import React, { useRef, useState } from "react";
 import { IKImage, ImageKitProvider, IKUpload } from "imagekitio-next";
 
 import config from "@/lib/config/config";
-import ImageKit from "imagekit";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { FilePath } from "tailwindcss/types/config";
 import { useToast } from "@/hooks/use-toast";
 
 const {

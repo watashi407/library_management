@@ -18,7 +18,7 @@ export const sendEmail = async ({
 }: {
   email: string;
   subject: string;
-  message: string;
+  message: React.ReactElement;
 }) => {
   await qstashClient.publishJSON({
     api: {
@@ -29,7 +29,7 @@ export const sendEmail = async ({
       from: "Watashi Libro <contact@watashi-alvin.site>",
       to: [email],
       subject,
-      html: message,
+      react: message,
     },
   });
 };
