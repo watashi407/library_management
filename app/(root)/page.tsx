@@ -5,10 +5,6 @@ import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 
 export default async function Home() {
-  const result = await db.select().from(users);
-
-  console.log("results users :", JSON.parse(JSON.stringify(result)));
-
   return (
     <>
       <BookOverview {...sampleBooks[0]} />
