@@ -44,7 +44,7 @@ export const { POST } = serve<InitialData>(async (context) => {
     await sendEmail({
       email,
       subject: "Welcome to Watashi Libro the library you need",
-      message: EmailTemplate({ firstName: fullName }) as React.ReactElement,
+      message: EmailTemplate({ name: fullName }) as React.ReactElement,
     });
   });
 
@@ -60,7 +60,7 @@ export const { POST } = serve<InitialData>(async (context) => {
         await sendEmail({
           email,
           subject: "Are you still there alive and kicking ?",
-          message: EmailTemplate({ firstName: fullName }) as React.ReactElement,
+          message: EmailTemplate({ name: fullName }) as React.ReactElement,
         });
       });
     } else if (state === "active") {
@@ -68,7 +68,7 @@ export const { POST } = serve<InitialData>(async (context) => {
         await sendEmail({
           email,
           subject: "Welcome Back!",
-          message: EmailTemplate({ firstName: fullName }) as React.ReactElement,
+          message: EmailTemplate({ name: fullName }) as React.ReactElement,
         });
       });
     }
