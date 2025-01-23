@@ -29,7 +29,7 @@ export const sendEmail = async ({
       from: "Watashi Libro <contact@watashi-alvin.site>",
       to: [email],
       subject,
-      message: message,
+      html: message,
     },
   });
 };
