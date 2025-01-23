@@ -1,8 +1,8 @@
+import { serve } from "@upstash/workflow/nextjs";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
-import { sendEmail } from "@/lib/workflow";
-import { serve } from "@upstash/workflow/nextjs";
 import { eq } from "drizzle-orm";
+import { sendEmail } from "@/lib/workflow";
 
 type UserState = "non-active" | "active";
 
@@ -28,7 +28,10 @@ const getUserState = async (email: string): Promise<UserState> => {
   const now = new Date();
   const timeDifference = now.getTime() - lastActivityDate.getTime();
 
-  if (timeDifference > THREE_DAYS_IN_MS && timeDifference < THIRTY_DAYS_IN_MS) {
+  if (
+    timeDifference > THREE_DAYS_IN_MS &&
+    timeDifference <= THIRTY_DAYS_IN_MS
+  ) {
     return "non-active";
   }
 
@@ -38,12 +41,12 @@ const getUserState = async (email: string): Promise<UserState> => {
 export const { POST } = serve<InitialData>(async (context) => {
   const { email, fullName } = context.requestPayload;
 
-  // welcome email
+  // Welcome Email
   await context.run("new-signup", async () => {
     await sendEmail({
       email,
-      subject: "Welcome to our platform",
-      message: `Welcome to our platform ${fullName} to my Watashi Libro`,
+      subject: "Welcome to the platform",
+      message: `Welcome ${fullName}!`,
     });
   });
 
@@ -58,16 +61,16 @@ export const { POST } = serve<InitialData>(async (context) => {
       await context.run("send-email-non-active", async () => {
         await sendEmail({
           email,
-          subject: "Welcome to our platform",
-          message: `Welcome to our platform ${fullName} to my Watashi Libro`,
+          subject: "Are you still there?",
+          message: `Hey ${fullName}, we miss you!`,
         });
       });
     } else if (state === "active") {
       await context.run("send-email-active", async () => {
         await sendEmail({
           email,
-          subject: "Welcome to our platform",
-          message: `Welcome to our platform ${fullName} to my Watashi Libro`,
+          subject: "Welcome back!",
+          message: `Welcome back ${fullName}!`,
         });
       });
     }
