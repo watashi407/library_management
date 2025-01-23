@@ -19,37 +19,35 @@ const UserOption = ({ session }: { session: Session }) => {
   const [isPending, startTransition] = useTransition();
   return (
     <>
-      {isPending ? (
-        <>
-          <div>loading...</div>
-        </>
-      ) : (
-        <>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              {" "}
-              <Avatar>
-                <AvatarFallback className="font-bold bg-primary">
-                  {getInitials(session?.user?.name as string)}
-                </AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="font-bold bg-primary">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link href="/profile">Profile</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => startTransition(async () => await signOutAuth())}
-              >
-                {" "}
-                Logout
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </>
-      )}
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          {" "}
+          <Avatar>
+            <AvatarFallback className="font-bold bg-primary">
+              {getInitials(session?.user?.name as string)}
+            </AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="font-bold bg-primary">
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <Link href="/profile">Profile</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => startTransition(async () => await signOutAuth())}
+          >
+            {" "}
+            {isPending ? (
+              <>
+                <div>loading...</div>
+              </>
+            ) : (
+              <>Logout</>
+            )}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </>
   );
 };
