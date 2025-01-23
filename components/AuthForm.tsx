@@ -1,5 +1,5 @@
 "use client";
-import React, { use } from "react";
+import React, { useTransition } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -45,6 +45,7 @@ const AuthForm = <T extends FieldValues>({
   defaultValues,
   onSubmit,
 }: Props<T>) => {
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const { toast } = useToast();
   const isSignIn = type === "SIGN_IN";
@@ -54,24 +55,26 @@ const AuthForm = <T extends FieldValues>({
   });
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
-    const result = await onSubmit(data);
+    startTransition(async () => {
+      const result = await onSubmit(data);
 
-    if (result.success) {
-      toast({
-        title: "Success",
-        description: `${isSignIn ? "You have successfully signed in" : "You have successfully signed up"}`,
-      });
+      if (result.success) {
+        toast({
+          title: "Success",
+          description: `${isSignIn ? "You have successfully signed in" : "You have successfully signed up"}`,
+        });
 
-      router.push("/");
-    } else {
-      toast({
-        title: `Error ${isSignIn ? "signing in" : "signing up"}`,
-        description:
-          result.error ??
-          `An error occurred while ${isSignIn ? "signing in" : "signing up"}`,
-        variant: "destructive",
-      });
-    }
+        router.push("/");
+      } else {
+        toast({
+          title: `Error ${isSignIn ? "signing in" : "signing up"}`,
+          description:
+            result.error ??
+            `An error occurred while ${isSignIn ? "signing in" : "signing up"}`,
+          variant: "destructive",
+        });
+      }
+    });
   };
 
   return (
@@ -122,8 +125,16 @@ const AuthForm = <T extends FieldValues>({
             />
           ))}
 
-          <Button type="submit" className="form-btn">
-            {isSignIn ? "Sign In" : "Sign Up"}
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="form-btn cursor-pointer"
+          >
+            {isPending ? (
+              <>Loading ..</>
+            ) : (
+              <>{isSignIn ? "Sign In" : "Sign Up"}</>
+            )}
           </Button>
         </form>
       </Form>
@@ -132,7 +143,7 @@ const AuthForm = <T extends FieldValues>({
         {isSignIn ? "New to Libro Watashi?" : "Already have an account?"}{" "}
         <Link
           href={isSignIn ? "/sign-up" : "/sign-in"}
-          className="font-bold text-primary"
+          className="font-bold text-primary cursor-pointer"
         >
           {isSignIn ? "Create an account" : "Sign in"}
         </Link>
