@@ -4,10 +4,12 @@ import Image from "next/image";
 import { adminSideBarLinks } from "@/constant";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn, getInitials } from "@/lib/utils";
 import path from "path";
+import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Session } from "next-auth";
 
-const Sidebar = () => {
+const Sidebar = ({ session }: { session: Session }) => {
   const pathname = usePathname();
 
   return (
@@ -55,6 +57,14 @@ const Sidebar = () => {
             );
           })}
         </div>
+      </div>
+
+      <div className="user">
+        <Avatar>
+          <AvatarFallback className="font-bold bg-primary">
+            {getInitials(session?.user?.name as string)}
+          </AvatarFallback>
+        </Avatar>
       </div>
     </div>
   );
