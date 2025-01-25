@@ -55,6 +55,32 @@ export const FIELD_TYPES = {
   password: "password",
 };
 
+export const FIELD_NAMES_BOOK = {
+  title: "Book Title",
+  description: "Book Description",
+  author: "Book Author",
+  genre: "Genre",
+  rating: "Rating",
+  totalCopies: "Total Copies",
+  coverUrl: "Book Cover URL",
+  coverColor: "Color",
+  videoUrl: "Book Video URL",
+  summary: "Book Summary",
+};
+
+export const FIELD_TYPES_BOOK = {
+  title: "text",
+  description: "text",
+  author: "text",
+  genre: "text",
+  rating: "number",
+  totalCopies: "number",
+  coverUrl: "text",
+  coverColor: "text",
+  videoUrl: "text",
+  summary: "text",
+};
+
 export const sampleBooks = [
   {
     id: 1,
