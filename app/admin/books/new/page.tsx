@@ -11,9 +11,10 @@ const page = () => {
           go back
         </Link>
       </Button>
-
-      <section className="w-full max-x-2xl">
-        <BookForm />
+      <section className="flex justify-center items-center">
+        <div className="w-full max-w-5xl">
+          <BookForm />
+        </div>
       </section>
     </>
   );

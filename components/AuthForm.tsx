@@ -25,9 +25,10 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constant";
-import ImageUpload from "./ImageUpload";
+
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import FileUpload from "./FileUpload";
 
 //define the types of props accept to the form function
 // we also passing a T that will extend the FieldValues coming from zod
@@ -106,7 +107,14 @@ const AuthForm = <T extends FieldValues>({
                   </FormLabel>
                   <FormControl>
                     {field.name === "universityCard" ? (
-                      <ImageUpload onFileChange={field.onChange} />
+                      <FileUpload
+                        type="image"
+                        accept="image/*"
+                        placeholder="Upload Your ID"
+                        folder="ids"
+                        variant="dark"
+                        onFileChange={field.onChange}
+                      />
                     ) : (
                       <Input
                         required
