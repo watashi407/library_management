@@ -7,10 +7,11 @@ import { Book } from "@/types";
 import { Session } from "next-auth";
 import { redirect } from "next/navigation";
 import { desc } from "drizzle-orm";
+import { auth } from "@/auth";
+import { checkUserSession } from "@/hooks/user_session";
 
 export default async function Home() {
-  // /{ session }: { session: Session }
-  // if (!session) return redirect("/sign-in");
+  const session = await checkUserSession();
 
   const latestBooks = (await db
     .select()

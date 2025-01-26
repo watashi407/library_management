@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import Header from "@/components/Header";
 import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
+import { checkUserSession } from "@/hooks/user_session";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import { after } from "next/server";
@@ -12,9 +13,7 @@ async function layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
-
-  if (!session) redirect("/sign-in");
+  const session = await checkUserSession();
 
   after(async () => {
     if (!session?.user?.id) return;
