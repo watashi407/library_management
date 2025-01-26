@@ -23,6 +23,8 @@ function BookCard({
   borrowStatus = "RETURNED",
   createdAt,
 }: GetBook) {
+  const bookStatus = borrowStatus === "BORROWED" ? true : false;
+
   return (
     <li className={cn(borrowStatus && "xs:w-52 w-full")}>
       <Link
