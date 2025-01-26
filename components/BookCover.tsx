@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import React from "react";
 import BookCoverSvg from "@/components/BookCoverSvg";
@@ -47,6 +48,7 @@ function BookCover({
           fill
           className="rounded-sm object-fill"
           loading="lazy"
+          lqip={{ active: true }}
         />
       </div>
     </div>

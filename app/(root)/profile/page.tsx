@@ -1,13 +1,16 @@
 import React from "react";
-import { sampleBooks } from "@/constant";
-import BookList from "@/components/BookList";
 
-function ProfilePage() {
+import BookList from "@/components/BookList";
+import { getBook } from "@/hooks/useBook";
+
+async function ProfilePage() {
+  const books = await getBook();
+
   return (
     <section className="p-2">
       <BookList
         title="Borrowed Books"
-        books={sampleBooks}
+        books={books}
         containerClassName="mt-28"
       />
     </section>
