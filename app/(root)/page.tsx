@@ -8,8 +8,9 @@ import { Session } from "next-auth";
 import { redirect } from "next/navigation";
 import { desc } from "drizzle-orm";
 
-export default async function Home({ session }: { session: Session }) {
-  if (!session) return redirect("/sign-in");
+export default async function Home() {
+  // /{ session }: { session: Session }
+  // if (!session) return redirect("/sign-in");
 
   const latestBooks = (await db
     .select()
