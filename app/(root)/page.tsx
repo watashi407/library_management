@@ -11,11 +11,14 @@ export default async function Home() {
   return (
     <>
       <BookOverview {...latestBooks[0]} />
-      <BookList
-        title="Latest Books"
-        books={latestBooks}
-        containerClassName="mt-28"
-      />
+
+      {latestBooks.length >= 2 && (
+        <BookList
+          title="Latest Books"
+          books={latestBooks}
+          containerClassName="mt-28"
+        />
+      )}
     </>
   );
 }

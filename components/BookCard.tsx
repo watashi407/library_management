@@ -23,11 +23,11 @@ function BookCard({
   createdAt,
 }: GetBook) {
   const bookStatus = borrowStatus === "BORROWED" ? true : false;
-
+  console.log(id);
   return (
     <li className={cn(bookStatus && "xs:w-52 w-full")}>
       <Link
-        href={`/books/${id}`}
+        href={`/books/${id as string}`}
         className={cn(bookStatus && "w-full flex flex-col items-center")}
       >
         <BookCover coverColor={coverColor} coverImage={coverUrl} />
