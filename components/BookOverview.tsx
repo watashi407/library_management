@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import BookCover from "./BookCover";
+import { GetBook } from "@/database/schema";
 
 function BookOverview({
   id,
@@ -12,14 +13,16 @@ function BookOverview({
   author,
   genre,
   rating,
-  total_copies,
-  available_copies,
+  coverUrl,
+  coverColor,
   description,
-  color,
-  cover,
-  video,
+  totalCopies,
+  availableCopies,
+  videoUrl,
   summary,
-}: BookSample) {
+  borrowStatus = "RETURNED",
+  createdAt,
+}: GetBook) {
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5" key={id}>
@@ -40,10 +43,10 @@ function BookOverview({
 
         <div className="book-copies">
           <p>
-            Total Books: <span>{total_copies}</span>
+            Total Books: <span>{totalCopies}</span>
           </p>
           <p>
-            Available Books: <span>{available_copies}</span>
+            Available Books: <span>{availableCopies}</span>
           </p>
         </div>
 
@@ -59,8 +62,8 @@ function BookOverview({
           <BookCover
             variant="wide"
             className="z-10"
-            coverColor={color}
-            coverImage={cover}
+            coverColor={coverColor}
+            coverImage={coverUrl}
           />
         </div>
 
@@ -68,8 +71,8 @@ function BookOverview({
           <BookCover
             variant="wide"
             className="z-10"
-            coverColor={color}
-            coverImage={cover}
+            coverColor={coverColor}
+            coverImage={coverUrl}
           />
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { boolean } from "drizzle-orm/pg-core";
 import {
   varchar,
   date,
@@ -39,6 +40,7 @@ export const users = pgTable("users", {
 export const books = pgTable("books", {
   id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
   title: varchar("title", { length: 255 }).notNull(),
+  author: varchar("author", { length: 255 }).notNull(),
   genre: text("genre").notNull(),
   rating: integer("rating").notNull(),
   coverUrl: text("cover_url").notNull(),
@@ -48,6 +50,7 @@ export const books = pgTable("books", {
   availableCopies: integer("available_copies").notNull().default(1),
   videoUrl: text("video_url").notNull(),
   summary: varchar("summary").notNull(),
+  borrowStatus: BORROW_STATUS_ENUM("borrow_status").default("RETURNED"),
   createdAt: timestamp("create_at", { withTimezone: true }).defaultNow(),
 });
 
@@ -55,3 +58,4 @@ export type InsertUser = typeof users.$inferInsert;
 export type SelectUser = typeof users.$inferSelect;
 
 export type InsertBook = typeof books.$inferInsert;
+export type GetBook = typeof books.$inferInsert;

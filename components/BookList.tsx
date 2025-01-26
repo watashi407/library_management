@@ -1,10 +1,10 @@
-import { Book, BookSample } from "@/types";
 import React from "react";
 import BookCard from "./BookCard";
+import { GetBook } from "@/database/schema";
 
 interface Props {
   title: string;
-  books: BookSample[];
+  books: GetBook[];
   containerClassName?: string;
 }
 
