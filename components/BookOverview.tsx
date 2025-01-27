@@ -4,8 +4,10 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
 import BookCover from "./BookCover";
-import { GetBook } from "@/database/schema";
+import { GetBook, users } from "@/database/schema";
 import { getUserId } from "@/hooks/user_session";
+import { eq } from "drizzle-orm";
+import { db } from "@/database/drizzle";
 
 interface Props {
   bookDetails: GetBook;
@@ -31,7 +33,12 @@ async function BookOverview({
   },
   userId,
 }: Props) {
-  const userIdFromSession = await getUserId(userId as string);
+  // const userIdFromSession = await getUserId(userId as string);
+  // const [user] = userId
+  //   ? await db.select().from(users).where(eq(users.id, userId)).limit(1)
+  //   : [null];
+
+  // console.log(user);
 
   return (
     <section className="book-overview">
