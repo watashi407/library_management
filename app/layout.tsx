@@ -26,8 +26,10 @@ const bebasNue = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "BookWise",
-  description: "Watashi BookWise University Library Management",
+  title: "Watashi Libro",
+  description:
+    "Watashi Libro - Its a Library Management that used in an University  ",
+  metadataBase: new URL("https://library-management-three-rouge.vercel.app/"),
 };
 
 export default async function RootLayout({
@@ -39,6 +41,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <meta
+        name="google5cb19de4be69b492"
+        content="c-o3TFknDr8XskMwfA2arY5lwGq-w8c13f7EjZzFECA"
+      />
       <SessionProvider session={session}>
         <body
           className={`${imbPlexSans.className} ${bebasNue.variable} antialiased`}
