@@ -4,7 +4,7 @@ import { checkUserSession } from "@/hooks/user_session";
 import { getBook } from "@/hooks/useBook";
 
 export default async function Home() {
-  const session = await checkUserSession();
+  await checkUserSession();
 
   const latestBooks = await getBook();
 
