@@ -20,6 +20,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   if (!bookDetails) redirect("/404");
 
+  console.log(bookDetails.videoUrl);
+
   return (
     <>
       <BookOverview
