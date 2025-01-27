@@ -28,3 +28,9 @@ export const checkAdminSession = async () => {
 
   return session;
 };
+
+export const getUserId = async (id: string) => {
+  const [user] = await db.select().from(users).where(eq(users.id, id)).limit(1);
+
+  return user;
+};

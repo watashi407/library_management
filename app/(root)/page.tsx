@@ -10,7 +10,7 @@ export default async function Home() {
 
   return (
     <>
-      <BookOverview {...latestBooks[0]} />
+      <BookOverview bookDetails={latestBooks[0]} />
 
       {latestBooks.length >= 2 && (
         <BookList

@@ -5,23 +5,34 @@ import React from "react";
 import { Button } from "./ui/button";
 import BookCover from "./BookCover";
 import { GetBook } from "@/database/schema";
+import { getUserId } from "@/hooks/user_session";
 
-function BookOverview({
-  id,
-  title,
-  author,
-  genre,
-  rating,
-  coverUrl,
-  coverColor,
-  description,
-  totalCopies,
-  availableCopies,
-  videoUrl,
-  summary,
-  borrowStatus = "RETURNED",
-  createdAt,
-}: GetBook) {
+interface Props {
+  bookDetails: GetBook;
+  userId?: string;
+}
+
+async function BookOverview({
+  bookDetails: {
+    id,
+    title,
+    author,
+    genre,
+    rating,
+    coverUrl,
+    coverColor,
+    description,
+    totalCopies,
+    availableCopies,
+    videoUrl,
+    summary,
+    borrowStatus = "RETURNED",
+    createdAt,
+  },
+  userId,
+}: Props) {
+  const userIdFromSession = await getUserId(userId as string);
+
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5" key={id}>
