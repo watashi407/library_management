@@ -26,10 +26,23 @@ const bebasNue = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Watashi Libro",
+  generator: "Next.js",
+  applicationName: "Watashi Libro",
+  referrer: "origin-when-cross-origin",
   description:
     "Watashi Libro - Its a Library Management that used in an University  ",
-  metadataBase: new URL("https://library-management-three-rouge.vercel.app/"),
+  keywords: ["Library", "Watashi", "Watashi Libro", "Library Management"],
+  authors: [
+    { name: "Watshi" },
+    { name: "Alvin", url: "https://github.com/watashi407/library_management" },
+  ],
+  creator: "Alvin Gultiano",
+  publisher: "Vercel",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 };
 
 export default async function RootLayout({
