@@ -5,7 +5,6 @@ import config from "@/lib/config/config";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { useToast } from "@/hooks/use-toast";
-import { set } from "zod";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -49,7 +48,6 @@ const authenticator = async () => {
 const ImageUpload = ({
   type,
   accept,
-  placeholder,
   folder,
   variant,
   value,

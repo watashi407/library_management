@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/database/drizzle";
 import { redirect } from "next/navigation";
 import BookOverview from "@/components/BookOverview";
-import { checkUserSession } from "@/hooks/user_session";
+import { checkUserSession } from "@/hooks/userSession";
 import BookVideo from "@/components/BookVideo";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {

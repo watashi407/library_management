@@ -5,7 +5,7 @@ import React from "react";
 import "@/styles/admin.css";
 import Sidebar from "@/components/admin/Sidebar";
 import Header from "@/components/admin/Header";
-import { checkAdminSession } from "@/hooks/user_session";
+import { checkAdminSession } from "@/hooks/userSession";
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await checkAdminSession();

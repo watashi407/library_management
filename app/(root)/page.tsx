@@ -1,6 +1,6 @@
 import BookList from "@/components/BookList";
 import BookOverview from "@/components/BookOverview";
-import { checkUserSession } from "@/hooks/user_session";
+import { checkUserSession } from "@/hooks/userSession";
 import { getBook } from "@/hooks/useBook";
 
 export default async function Home() {
