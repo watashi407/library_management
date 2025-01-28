@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import React from "react";
 import { Button } from "./ui/button";
@@ -27,7 +25,6 @@ async function BookOverview({
   availableCopies,
   userId,
 }: Props) {
-  console.log(userId);
   if (!userId) return null;
 
   const [user] = await db
