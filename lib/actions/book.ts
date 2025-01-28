@@ -4,6 +4,7 @@ import { db } from "@/database/drizzle";
 import { books, borrowRecords } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import dayjs from "dayjs";
+import { BorrowBookParams } from "@/types";
 
 export const borrowBook = async (params: BorrowBookParams) => {
   const { userId, bookId } = params;

@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { GetBook } from "@/database/schema";
+interface Props extends GetBook {
+  isLoanedBook?: boolean;
+}
 
 function BookCard({
   id,
@@ -19,24 +22,23 @@ function BookCard({
   availableCopies,
   videoUrl,
   summary,
-  borrowStatus = "RETURNED",
   createdAt,
-}: GetBook) {
-  const bookStatus = borrowStatus === "BORROWED" ? true : false;
+  isLoanedBook,
+}: Props) {
   console.log(id);
   return (
-    <li className={cn(bookStatus && "xs:w-52 w-full")}>
+    <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
       <Link
         href={`/books/${id as string}`}
-        className={cn(bookStatus && "w-full flex flex-col items-center")}
+        className={cn(isLoanedBook && "w-full flex flex-col items-center")}
       >
         <BookCover coverColor={coverColor} coverImage={coverUrl} />
-        <div className={cn("mt-4", !bookStatus && "xs:max-w-40 max-w-28")}>
+        <div className={cn("mt-4", !isLoanedBook && "xs:max-w-40 max-w-28")}>
           <p className="book-title">{title}</p>
           <p className="book-genre">{genre}</p>
         </div>
 
-        {bookStatus && (
+        {isLoanedBook && (
           <div className="mt-3 w-full">
             <div className="book-loaned">
               <Image

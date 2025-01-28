@@ -24,10 +24,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <>
-      <BookOverview
-        bookDetails={bookDetails}
-        userId={session?.user?.id as string}
-      />
+      <BookOverview {...bookDetails} userId={session?.user?.id as string} />
       <div className="book-details">
         <div className="flex[1.5]">
           <section className="flex flex-col gap-7">

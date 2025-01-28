@@ -8,31 +8,44 @@ import { GetBook, users } from "@/database/schema";
 import { getUserId } from "@/hooks/user_session";
 import { eq } from "drizzle-orm";
 import { db } from "@/database/drizzle";
+import BorrowBook from "./BorrowBook";
 
-interface Props {
-  bookDetails: GetBook;
+interface Props extends GetBook {
   userId?: string;
 }
 
 async function BookOverview({
-  bookDetails: {
-    id,
-    title,
-    author,
-    genre,
-    rating,
-    coverUrl,
-    coverColor,
-    description,
-    totalCopies,
-    availableCopies,
-    videoUrl,
-    summary,
-    borrowStatus = "RETURNED",
-    createdAt,
-  },
+  id,
+  title,
+  author,
+  genre,
+  rating,
+  coverUrl,
+  coverColor,
+  description,
+  totalCopies,
+  availableCopies,
+  videoUrl,
+  summary,
+  createdAt,
   userId,
 }: Props) {
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
+
+  if (!user) return null;
+
+  const borrowingEligibility = {
+    isEligible: (availableCopies ?? 0) > 0 && user.status === "APPROVED",
+    message:
+      (availableCopies ?? 0) < 0
+        ? "Book is not available"
+        : "Your are not eligible to borrow this book",
+  };
+
   // const userIdFromSession = await getUserId(userId as string);
   // const [user] = userId
   //   ? await db.select().from(users).where(eq(users.id, userId)).limit(1)
@@ -68,10 +81,11 @@ async function BookOverview({
         </div>
 
         <p className="book-description">{description}</p>
-        <Button className="book-overview_btn">
-          <Image src="/icons/book.svg" alt="book" width={20} height={20} />
-          <p className="font-bebas-neue text-xl text-dark-100">Borrow</p>
-        </Button>
+        <BorrowBook
+          bookId={id as string}
+          userId={userId as string}
+          borrowingEligibility={borrowingEligibility}
+        />
       </div>
 
       <div className="relative flex flex-1 justify-center">
