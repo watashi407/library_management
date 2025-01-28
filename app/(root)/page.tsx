@@ -4,13 +4,13 @@ import { checkUserSession } from "@/hooks/user_session";
 import { getBook } from "@/hooks/useBook";
 
 export default async function Home() {
-  await checkUserSession();
+  const session = await checkUserSession();
 
   const latestBooks = await getBook();
 
   return (
     <>
-      <BookOverview {...latestBooks[0]} />
+      <BookOverview {...latestBooks[0]} userId={session?.user?.id as string} />
 
       {latestBooks.length >= 2 && (
         <BookList

@@ -25,11 +25,11 @@ async function BookOverview({
   description,
   totalCopies,
   availableCopies,
-  videoUrl,
-  summary,
-  createdAt,
   userId,
 }: Props) {
+  console.log(userId);
+  if (!userId) return null;
+
   const [user] = await db
     .select()
     .from(users)
