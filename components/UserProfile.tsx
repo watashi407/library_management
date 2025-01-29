@@ -42,7 +42,7 @@ const UserProfile = async ({ user }: Props) => {
 
         <div>
           <p className="text-gray-400">University Card</p>
-          <IKImage
+          {/* <IKImage
             path={user.universityCard}
             urlEndpoint={config.env.imagekit.urlEndpoint}
             alt="university card"
@@ -50,7 +50,7 @@ const UserProfile = async ({ user }: Props) => {
             className="rounded-sm object-fill"
             loading="lazy"
             lqip={{ active: true }}
-          />
+          /> */}
         </div>
       </div>
     </section>
