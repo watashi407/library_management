@@ -72,7 +72,7 @@ export const borrowRecords = pgTable("borrow_records", {
 });
 
 export type InsertUser = typeof users.$inferInsert;
-export type SelectUser = typeof users.$inferSelect;
+export type GetUser = typeof users.$inferSelect;
 
 export type InsertBook = typeof books.$inferInsert;
 export type GetBook = typeof books.$inferInsert;
