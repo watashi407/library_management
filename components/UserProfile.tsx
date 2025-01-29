@@ -13,8 +13,10 @@ const UserProfile = ({ user }: Props) => {
     <section className=" bg-gradient-to-b from-slate-700 to-slate-900  rounded-lg shadow-lg p-8 mb-6 text-white ">
       {/* Profile Header */}
       <div className="flex items-center gap-6 mb-8 ">
-        <div className="w-16 h-16 rounded-full ml-12 bg-gray-800 flex items-center justify-center ">
-          <span className="text-xl font-bold">{user.fullName[0]}</span>
+        <div className="w-24 h-24 rounded-full ml-12 bg-primary flex items-center justify-center  shadow-lg">
+          <span className="text-5xl font-bold text-dark-500 ">
+            {user.fullName[0]}
+          </span>
         </div>
         <div>
           <div className="flex items-center gap-2">
