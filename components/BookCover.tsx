@@ -31,7 +31,7 @@ function BookCover({
   return (
     <div
       className={cn(
-        "relative transition-all duration-300",
+        `relative transition-all duration-300    `,
         variantStyles[variant],
         className
       )}
@@ -39,7 +39,7 @@ function BookCover({
       <BookCoverSvg coverColor={coverColor} />
       <div
         className="absolute z-10"
-        style={{ left: "12%", width: "87.5%", height: "88%" }}
+        style={{ left: "12%", width: "90.5%", height: "88%" }}
       >
         <IKImage
           path={coverImage}

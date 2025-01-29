@@ -1,7 +1,7 @@
 import { db } from "@/database/drizzle";
 import { books, borrowRecords } from "@/database/schema";
 
-import { desc, eq, inArray } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 export async function getBarrowBooks(id: string) {
   const query = db

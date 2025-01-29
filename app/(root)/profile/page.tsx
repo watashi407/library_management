@@ -20,7 +20,10 @@ async function ProfilePage() {
     : [];
 
   const barrowedBooksRecord = barrowRecords
-    ? barrowRecords.map((record) => record.borrowRecord)
+    ? barrowRecords.map((record) => ({
+        ...record.borrowRecord,
+        borrowDate: new Date(record.borrowRecord.borrowDate),
+      }))
     : [];
 
   return (
@@ -36,7 +39,7 @@ async function ProfilePage() {
           title="Borrowed Books"
           books={barrowedBooks}
           barrowedBooksRecord={barrowedBooksRecord}
-          containerClassName="space-y-4"
+          containerClassName="max-w-4xl mx-auto p-6  min-h-screen"
         />
       </div>
     </section>

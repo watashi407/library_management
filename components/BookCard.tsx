@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import BookCover from "./BookCover";
-import { cn } from "@/lib/utils";
+import { cn, dueDateTimeCaculation, formattedDateMonthDay } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { GetBarrowBookBook, GetBook } from "@/database/schema";
+import { ReceiptText } from "lucide-react";
+import DateInfo from "./DateInfo";
 
 interface Props extends GetBook {
   barrowedBooksRecord?: GetBarrowBookBook[];
@@ -26,35 +28,63 @@ async function BookCard({
   createdAt,
   barrowedBooksRecord,
 }: Props) {
+  const barrowedDate =
+    barrowedBooksRecord?.map((record) => {
+      return formattedDateMonthDay(record.borrowDate as unknown as string);
+    }) ?? [];
+
+  const timeRemaining =
+    barrowedBooksRecord?.map((record) => {
+      if (!record.borrowDate || !record.dueDate) return 0;
+      return dueDateTimeCaculation(
+        record.borrowDate as unknown as string,
+        record.dueDate
+      );
+    }) ?? [];
+
   const isLoanedBook = barrowedBooksRecord?.some(
     (record) => record.bookId === id
   );
 
   return (
-    <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
+    <li
+      className={cn(
+        isLoanedBook &&
+          `xs:w-60 flex items-center justify-center w-full bg-gradient-to-b from-slate-900 to-slate-700 rounded-lg shadow-lg p-8 `
+      )}
+    >
       <Link
         href={`/books/${id as string}`}
-        className={cn(isLoanedBook && "w-full flex flex-col items-center")}
+        className={cn(isLoanedBook && "w-full flex flex-col ")}
       >
-        <BookCover coverColor={coverColor} coverImage={coverUrl} />
-        <div className={cn("mt-4", !isLoanedBook && "xs:max-w-40 max-w-28")}>
-          <p className="book-title">{title}</p>
-          <p className="book-genre">{genre}</p>
+        <span className="item-cener">
+          <BookCover coverColor={coverColor} coverImage={coverUrl} />
+        </span>
+        <div className={cn("mt-3 ", !isLoanedBook && "xs:max-w-40 max-w-28 ")}>
+          <p className="book-title line-clamp-1 ">{title}</p>
+          <p className="book-genre line-clamp-1">{genre}</p>
         </div>
 
         {isLoanedBook && (
-          <div className="mt-3 w-full">
-            <div className="book-loaned">
-              <Image
-                src={`/icons/calendar.svg`}
-                alt={`calendar`}
-                width={18}
-                height={18}
-                className="object-contain"
+          <div className="mt-3 w-full grid grid-cols-[1fr_auto] gap-2 items-center">
+            <div className="space-y-3">
+              <DateInfo
+                icon="/icons/calendar.svg"
+                label="Borrowed"
+                value={timeRemaining as unknown as string}
               />
-              <p className="text-light-100">{}</p>
+              <DateInfo
+                icon="/icons/clock.svg"
+                label="Due in"
+                value={timeRemaining as unknown as string}
+              />
             </div>
-            <Button className="book-btn">Download receipt</Button>
+            <Button
+              className="!bg-transparent self-end justify-self-end"
+              aria-label="View receipt"
+            >
+              <ReceiptText color="#df5d5d" strokeWidth={1.75} />
+            </Button>
           </div>
         )}
       </Link>
