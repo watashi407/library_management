@@ -4,10 +4,10 @@ import BookCover from "./BookCover";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { GetBook } from "@/database/schema";
+import { GetBarrowBookBook, GetBook } from "@/database/schema";
 
 interface Props extends GetBook {
-  barrowedBooksId?: string[];
+  barrowedBooksRecord?: GetBarrowBookBook[];
 }
 
 async function BookCard({
@@ -24,9 +24,11 @@ async function BookCard({
   videoUrl,
   summary,
   createdAt,
-  barrowedBooksId,
+  barrowedBooksRecord,
 }: Props) {
-  const isLoanedBook = barrowedBooksId?.includes(id as string);
+  const isLoanedBook = barrowedBooksRecord?.some(
+    (record) => record.bookId === id
+  );
 
   return (
     <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
@@ -50,7 +52,7 @@ async function BookCard({
                 height={18}
                 className="object-contain"
               />
-              <p className="text-light-100">11 days left to return</p>
+              <p className="text-light-100">{}</p>
             </div>
             <Button className="book-btn">Download receipt</Button>
           </div>

@@ -14,6 +14,7 @@ export async function getBarrowBooks(id: string) {
         status: borrowRecords.status,
         bookId: borrowRecords.bookId,
         userId: borrowRecords.userId,
+        createdAt: borrowRecords.createdAt,
       },
       book: {
         id: books.id,

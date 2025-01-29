@@ -78,4 +78,4 @@ export type InsertBook = typeof books.$inferInsert;
 export type GetBook = typeof books.$inferInsert;
 
 export type InsertBarrowBook = typeof borrowRecords.$inferInsert;
-export type GetBarrowBookBook = typeof books.$inferInsert;
+export type GetBarrowBookBook = typeof borrowRecords.$inferInsert;
