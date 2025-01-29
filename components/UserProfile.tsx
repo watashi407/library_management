@@ -8,7 +8,7 @@ interface Props {
   user: GetUser;
 }
 
-const UserProfile = async ({ user }: Props) => {
+const UserProfile = ({ user }: Props) => {
   console.log("This the university card", user.universityCard);
   return (
     <section className="bg-slate-700 rounded-lg shadow-lg p-12 mb-6 text-white">
@@ -42,15 +42,17 @@ const UserProfile = async ({ user }: Props) => {
 
         <div>
           <p className="text-gray-400">University Card</p>
-          <IKImage
-            path={user.universityCard}
-            urlEndpoint={config.env.imagekit.urlEndpoint}
-            alt="university card"
-            fill
-            className="rounded-sm object-fill"
-            loading="lazy"
-            lqip={{ active: true }}
-          />
+
+          <div className="p-2 mt-2">
+            <IKImage
+              path={user.universityCard}
+              urlEndpoint={config.env.imagekit.urlEndpoint}
+              alt="university card"
+              className="rounded-sm object-fill"
+              width={500}
+              height={300}
+            />
+          </div>
         </div>
       </div>
     </section>
