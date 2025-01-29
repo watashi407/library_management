@@ -16,7 +16,7 @@ async function ProfilePage() {
   ]);
 
   return (
-    <section className="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-[minmax(300px,1fr)_2fr] gap-8 xl:gap-12">
+    <section className="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-[minmax(600px,1fr)_2fr] gap-8 xl:gap-12">
       {userProfile && (
         <div className="break-words min-w-0">
           <UserProfile user={userProfile} />
