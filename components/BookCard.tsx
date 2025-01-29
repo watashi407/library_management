@@ -71,7 +71,7 @@ async function BookCard({
               <DateInfo
                 icon="/icons/calendar.svg"
                 label="Borrowed"
-                value={timeRemaining as unknown as string}
+                value={barrowedDate as unknown as string}
               />
               <DateInfo
                 icon="/icons/clock.svg"
