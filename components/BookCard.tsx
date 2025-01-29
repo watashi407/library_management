@@ -5,11 +5,12 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { GetBook } from "@/database/schema";
+
 interface Props extends GetBook {
-  isLoanedBook?: boolean;
+  barrowedBooksId?: string[];
 }
 
-function BookCard({
+async function BookCard({
   id,
   title,
   author,
@@ -23,9 +24,10 @@ function BookCard({
   videoUrl,
   summary,
   createdAt,
-  isLoanedBook,
+  barrowedBooksId,
 }: Props) {
-  console.log(id);
+  const isLoanedBook = barrowedBooksId?.includes(id as string);
+
   return (
     <li className={cn(isLoanedBook && "xs:w-52 w-full")}>
       <Link

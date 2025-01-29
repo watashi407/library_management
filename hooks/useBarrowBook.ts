@@ -1,24 +1,39 @@
 import { db } from "@/database/drizzle";
 import { books, borrowRecords } from "@/database/schema";
-import React from "react";
+
 import { desc, eq, inArray } from "drizzle-orm";
 
 export async function getBarrowBooks(id: string) {
-  // First get the borrowed records
-  const returnBooksId = await db
-    .select()
+  const query = db
+    .select({
+      borrowRecord: {
+        id: borrowRecords.id,
+        borrowDate: borrowRecords.borrowDate,
+        dueDate: borrowRecords.dueDate,
+        returnDate: borrowRecords.returnDate,
+        status: borrowRecords.status,
+        bookId: borrowRecords.bookId,
+        userId: borrowRecords.userId,
+      },
+      book: {
+        id: books.id,
+        title: books.title,
+        author: books.author,
+        genre: books.genre,
+        coverUrl: books.coverUrl,
+        coverColor: books.coverColor,
+        description: books.description,
+        totalCopies: books.totalCopies,
+        availableCopies: books.availableCopies,
+        videoUrl: books.videoUrl,
+        summary: books.summary,
+        createdAt: books.createdAt,
+        rating: books.rating,
+      },
+    })
     .from(borrowRecords)
-    .where(eq(borrowRecords.userId, id))
-    .limit(10);
+    .innerJoin(books, eq(books.id, borrowRecords.bookId))
+    .where(eq(borrowRecords.userId, id));
 
-  // Extract all bookIds
-  const bookIds = returnBooksId.map((record) => record.bookId);
-
-  // Then get all books in a single query
-  const borrowedBooks = await db
-    .select()
-    .from(books)
-    .where(inArray(books.id, bookIds));
-
-  return borrowedBooks;
+  return query;
 }

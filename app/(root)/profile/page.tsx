@@ -15,6 +15,16 @@ async function ProfilePage() {
     userId ? getUserId(userId) : null,
   ]);
 
+  const barrowedBooks = barrowRecords
+    ? barrowRecords.map((record) => record.book)
+    : [];
+
+  const barrowedBooksId = barrowRecords
+    ? barrowRecords.map((record) => record.borrowRecord.bookId)
+    : [];
+
+  console.log(barrowedBooksId);
+
   return (
     <section className="container mx-auto p-4 grid grid-cols-1 lg:grid-cols-[minmax(600px,1fr)_2fr] gap-8 xl:gap-12">
       {userProfile && (
@@ -26,8 +36,9 @@ async function ProfilePage() {
       <div className="min-w-0">
         <BookList
           title="Borrowed Books"
-          books={barrowRecords}
+          books={barrowedBooks}
           containerClassName="space-y-4"
+          barrowedBooksId={barrowedBooksId}
         />
       </div>
     </section>
